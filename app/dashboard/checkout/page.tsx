@@ -17,7 +17,7 @@ export default function CheckoutPage() {
   const router = useRouter()
   const { toast } = useToast()
   const [paymentMethod, setPaymentMethod] = useState("credit-card")
-  
+
   const handlePlaceOrder = () => {
     toast({
       title: "Order placed successfully",
@@ -34,15 +34,15 @@ export default function CheckoutPage() {
           Complete your order by providing shipping and payment details.
         </p>
       </div>
-      
+
       <div className="grid gap-6 lg:grid-cols-3">
+        {/* Left Side - Shipping and Payment */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Shipping Information */}
           <Card>
             <CardHeader>
               <CardTitle>Shipping Information</CardTitle>
-              <CardDescription>
-                Enter your shipping address details
-              </CardDescription>
+              <CardDescription>Enter your shipping address details</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -110,13 +110,12 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
           </Card>
-          
+
+          {/* Payment Method */}
           <Card>
             <CardHeader>
               <CardTitle>Payment Method</CardTitle>
-              <CardDescription>
-                Select your preferred payment method
-              </CardDescription>
+              <CardDescription>Select your preferred payment method</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
@@ -136,7 +135,7 @@ export default function CheckoutPage() {
                   <Label htmlFor="bank-transfer">Bank Transfer</Label>
                 </div>
               </RadioGroup>
-              
+
               <Tabs value={paymentMethod} className="mt-4">
                 <TabsContent value="credit-card" className="space-y-4">
                   <div className="space-y-2">
@@ -153,7 +152,7 @@ export default function CheckoutPage() {
                           </SelectTrigger>
                           <SelectContent>
                             {Array.from({ length: 12 }, (_, i) => {
-                              const month = (i + 1).toString().padStart(2, '0')
+                              const month = (i + 1).toString().padStart(2, "0")
                               return (
                                 <SelectItem key={month} value={month}>
                                   {month}
@@ -189,11 +188,13 @@ export default function CheckoutPage() {
                     <Input id="name-on-card" placeholder="John Doe" />
                   </div>
                 </TabsContent>
+
                 <TabsContent value="paypal">
                   <div className="py-4 text-center">
                     <p>You will be redirected to PayPal to complete your payment.</p>
                   </div>
                 </TabsContent>
+
                 <TabsContent value="bank-transfer">
                   <div className="py-4 text-center">
                     <p>You will receive bank transfer instructions after placing your order.</p>
@@ -203,7 +204,8 @@ export default function CheckoutPage() {
             </CardContent>
           </Card>
         </div>
-        
+
+        {/* Right Side - Order Summary */}
         <div>
           <Card>
             <CardHeader>
@@ -229,7 +231,7 @@ export default function CheckoutPage() {
                   <span>$107.66</span>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="text-sm font-medium">Items in Order</div>
                 <div className="space-y-2 text-sm">
@@ -247,7 +249,7 @@ export default function CheckoutPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center text-sm text-muted-foreground">
                 <ShieldCheck className="mr-2 h-4 w-4" />
                 <span>Your payment information is secure and encrypted</span>
@@ -259,4 +261,8 @@ export default function CheckoutPage() {
               </Button>
             </CardFooter>
           </Card>
-        </div>\
+        </div>
+      </div>
+    </div>
+  )
+}
